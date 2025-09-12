@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View My Grades</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(to right, #43cea2, #185a9d); margin:0; padding:0; min-height:100vh; display:flex; justify-content:center; align-items:center; }
+        .container { background:#fff; padding:40px 50px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.2); width:90%; max-width:600px; text-align:center; }
+        h2 { margin-bottom:20px; color:#333; }
+        table { width:100%; border-collapse:collapse; margin-top:20px; }
+        th, td { padding:12px 15px; border:1px solid #ddd; text-align:center; }
+        th { background-color:#185a9d; color:#fff; }
+        tr:hover { background-color:#43cea2; color:#fff; transition:0.3s; }
+        input[type="number"] { padding:6px; border-radius:5px; width:150px; margin-right:10px; }
+        button { padding:8px 15px; border:none; border-radius:5px; background:#185a9d; color:#fff; cursor:pointer; }
+        button:hover { background:#43cea2; }
+        p { color:red; }
+        a { display:inline-block; margin-top:20px; color:#185a9d; text-decoration:none; font-weight:bold; }
+        a:hover { color:#43cea2; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>📊 View My Grades</h2>
+
+    <!-- Form to enter Student ID -->
+    <form th:action="@{/faculty/assignments/student/grades}" method="post">
+        <input type="number" name="studentId" placeholder="Enter Student ID" required/>
+        <button type="submit">Show Grades</button>
+    </form>
+
+    <!-- Message if no grades found -->
+    <p th:if="${message != null}" th:text="${message}"></p>
+
+    <!-- Table to display grades -->
+    <div th:if="${submissions != null}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Assignment Title</th>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="submission : ${submissions}">
+                    <td th:text="${submission.assignment.title}"></td>
+                    <td th:text="${submission.assignment.subject}"></td>
+                    <td th:text="${submission.grade} ?: 'Not Graded'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+	<a th:href="@{/student}">⬅ Back to Student Menu</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Student</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 26px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 8px rgba(37,117,252,0.3);
+            outline: none;
+        }
+
+        button {
+            background-color: #2575fc;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #6a11cb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2575fc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #6a11cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🗑️ Delete Student</h2>
+        <form method="post" th:action="@{/faculty/delete-student}">
+            <label>Select Student:</label>
+            <select name="studentId" required>
+                <option th:each="s : ${students}" 
+                        th:value="${s.id}" 
+                        th:text="${s.name} + ' (ID:' + ${s.id} + ')'">
+                </option>
+            </select>
+
+            <button type="submit">Delete</button>
+        </form>
+
+        <a th:href="@{/faculty}">⬅ Back to Faculty Menu</a>
+    </div>
+</body>
+</html>

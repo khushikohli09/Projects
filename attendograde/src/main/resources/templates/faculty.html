@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Menu</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #43cea2, #185a9d);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for menu */
+        .container {
+            background: #ffffff;
+            padding: 50px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        /* Menu buttons */
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            background-color: #185a9d;
+            color: white;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #43cea2;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👩‍🏫 Faculty Menu</h1>
+        <div class="menu">
+            <a class="btn" th:href="@{/faculty/addstudent}">➕ Add Student</a>
+            <a class="btn" th:href="@{/faculty/update-marks}">📝 Update Marks</a>
+            <a class="btn" th:href="@{/faculty/update-attendance}">📊 Update Attendance</a>
+            <a class="btn" th:href="@{/faculty/view-all}">👀 View All Students</a>
+            <a class="btn" th:href="@{/faculty/delete-student}">🗑️ Delete Student</a>
+
+            <!-- Assignment Tracking Features -->
+            <a class="btn" th:href="@{/faculty/assignments/add}">📚 Add Assignment</a>
+            <a class="btn" th:href="@{/faculty/assignments/all}">👀 View All Assignments </a>
+
+            <a class="btn" th:href="@{/}">⬅ Back to Main Menu</a>
+        </div>
+    </div>
+</body>
+</html>

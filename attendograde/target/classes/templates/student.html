@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Menu</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container for menu */
+        .container {
+            background: #ffffff;
+            padding: 50px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        /* Menu buttons */
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            background-color: #2575fc;
+            color: white;
+            padding: 15px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #6a11cb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Student Menu </h1>
+        <div class="menu">
+            <a class="btn" th:href="@{/view-attendance}">📊 View My Attendance</a>
+            <a class="btn" th:href="@{/view-reportcard}">📝 View My Report Card</a>
+            <a class="btn" th:href="@{/faculty/assignments/student/assignments}">📚 View Assignments</a>
+            <a class="btn" th:href="@{/faculty/assignments/submit}">📤 Submit Assignment</a>
+	<a class="btn" th:href="@{/faculty/assignments/student/grades}">📝 View My Grades</a>
+	            <a class="btn" th:href="@{/}">⬅ Back to Main Menu</a>
+        </div>
+    </div>
+</body>
+</html>

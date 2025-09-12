@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View My Attendance</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 400px;
+            max-width: 95%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 8px rgba(37,117,252,0.3);
+            outline: none;
+        }
+
+        button {
+            background-color: #2575fc;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #6a11cb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: left;
+            background-color: #f2f2f2;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .result p {
+            margin: 8px 0;
+            font-weight: bold;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #2575fc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: #6a11cb;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📊 View My Attendance</h2>
+
+        <!-- Input form disappears after submission -->
+        <form method="get" th:action="@{/view-attendance}" th:if="${student == null}">
+            <label>Enter Student ID:</label>
+            <input type="number" name="id" placeholder="Student ID" required>
+            <button type="submit">Check Attendance</button>
+        </form>
+
+        <!-- Attendance Result -->
+        <div class="result" th:if="${student != null}">
+            <p><b>Name:</b> <span th:text="${student.name}"></span></p>
+            <p><b>Attendance:</b> <span th:text="${student.attendedClasses}"></span> / <span th:text="${student.totalClasses}"></span></p>
+            <p><b>Percentage:</b> <span th:text="${(student.attendedClasses * 100) / student.totalClasses}"></span> %</p>
+        </div>
+
+        <!-- Error Display -->
+        <div class="error" th:if="${student == null}" th:text="${errorMessage}"></div>
+
+        <!-- Back Link -->
+        <a th:href="@{/student}">⬅ Back to Student Menu</a>
+    </div>
+</body>
+</html>

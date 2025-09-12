@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendograde Dashboard</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            margin: 100px auto;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 50px;
+            color: #333;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Welcome to Attendograde</h1>
+        <div class="menu">
+            <a class="btn" th:href="@{/faculty}">👥 Faculty Menu </a>
+            <a class="btn" th:href="@{/student}">🎓 Student Menu </a>
+        </div>
+    </div>
+</body>
+</html>
