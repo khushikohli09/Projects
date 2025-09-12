@@ -37,7 +37,7 @@
             color: #555;
         }
 
-        input {
+        select, input {
             width: 100%;
             padding: 12px 15px;
             margin-bottom: 20px;
@@ -47,7 +47,7 @@
             transition: 0.3s;
         }
 
-        input:focus {
+        select:focus, input:focus {
             border-color: #185a9d;
             box-shadow: 0 0 8px rgba(24, 90, 157, 0.3);
             outline: none;
@@ -89,8 +89,13 @@
     <div class="container">
         <h2>📊 Update Attendance</h2>
         <form method="post" th:action="@{/faculty/update-attendance}">
-            <label>Student ID:</label>
-            <input type="number" name="studentId" placeholder="Enter student ID" required>
+            <!-- Student Dropdown -->
+            <label>Select Student:</label>
+            <select name="studentId" required>
+                <option th:each="s : ${students}" 
+                        th:value="${s.id}" 
+                        th:text="${s.name} + ' (ID:' + ${s.id} + ')'"></option>
+            </select>
 
             <label>Attended Classes:</label>
             <input type="number" name="attended" placeholder="Number of attended classes" required>

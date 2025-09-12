@@ -1,6 +1,7 @@
 package com.univ.attendograde.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,16 +12,41 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Student name cannot be blank")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
+
+    @NotBlank(message = "Roll number cannot be blank")
+    @Pattern(regexp = "^[A-Za-z0-9-]+$", message = "Roll number must be alphanumeric")
     private String rollNo;
+
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Invalid email format")
     private String email;
 
-    private String department;   // Department
-    private Integer year;        // Year (1,2,3,4)
-    private String phone;        // Phone number
-    private String bloodGroup;   // Blood group
+    @NotBlank(message = "Department cannot be blank")
+    private String department;
 
+    @NotNull(message = "Year is required")
+    @Min(value = 1, message = "Year must be at least 1")
+    @Max(value = 4, message = "Year cannot be greater than 4")
+    private Integer year;
+
+    @NotBlank(message = "Phone number cannot be blank")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits")
+    private String phone;
+
+    @NotBlank(message = "Blood group cannot be blank")
+    @Pattern(
+        regexp = "^(A|B|AB|O)[+-]$",
+        message = "Invalid blood group format (e.g., A+, O-, AB+)"
+    )
+    private String bloodGroup;
+
+    @Min(value = 0, message = "Total classes cannot be negative")
     private Integer totalClasses = 0;
+
+    @Min(value = 0, message = "Attended classes cannot be negative")
     private Integer attendedClasses = 0;
 
     // Subject-wise marks
@@ -31,7 +57,7 @@ public class Student {
     )
     @MapKeyColumn(name = "subject")
     @Column(name = "marks")
-    private Map<String, Integer> subjectMarks = new HashMap<>();
+    private Map<String, @Min(value = 0) @Max(value = 100) Integer> subjectMarks = new HashMap<>();
 
     // Assignment-wise marks
     @ElementCollection(fetch = FetchType.EAGER)
@@ -41,7 +67,7 @@ public class Student {
     )
     @MapKeyColumn(name = "assignment_name")
     @Column(name = "marks")
-    private Map<String, Integer> assignmentMarks = new HashMap<>();
+    private Map<String, @Min(value = 0) @Max(value = 100) Integer> assignmentMarks = new HashMap<>();
 
     // Attendance %
     public double getAttendancePercentage() {
